@@ -1,0 +1,53 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Swagger TODO REST API"
+  description: "A sample for TODO REST API"
+host: "localhost:8000"
+basePath: "/api"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /todos:
+    post:
+      operationId: postTodo
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/TodoForm'
+      responses:
+        '201':
+          description: Created
+  /todos/{id}:
+    get:
+      operationId: getTodoById
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Todo'
+definitions:
+  Todo:
+    type: object
+    properties:
+      id:
+        type: number
+        format: uint
+      title:
+        type: string
+  TodoForm:
+    type: object
+    properties:
+      title:
+        type: string
